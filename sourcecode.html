@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dark Data Market</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    header {
+      text-align: center;
+      padding: 20px 0;
+      position: relative;
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+      color: #00ff00;
+    }
+    .account-topright {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .account-topright a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 8px 15px;
+      border-radius: 5px;
+      background-color: #2a2a2a;
+      transition: background-color 0.3s;
+      margin-right: 1px;
+    }
+    .account-topright a:hover,
+    .account-topright a.active {
+      background-color: #00ff00;
+      color: #1a1a1a;
+    }
+
+    nav {
+      background-color: #2a2a2a;
+      padding: 10px 0;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #00ff00;
+      color: #1a1a1a;
+    }
+    nav ul li a.active {
+      background-color: #00ff00;
+      color: #1a1a1a;
+      font-weight: bold;
+    }
+
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .product {
+      background-color: #2a2a2a;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .product h3 {
+      margin: 0 0 10px;
+      color: #00ff00;
+    }
+    .product p {
+      margin: 5px 0;
+    }
+    .contact, .home {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .home h2 {
+      color: #00ff00;
+    }
+    .contact p, .home p {
+      font-size: 1.1em;
+    }
+    .login-form {
+      max-width: 400px;
+      margin: 20px auto;
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    .login-form button {
+      background-color: #00ff00;
+      color: #1a1a1a;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      width: 100%;
+    }
+    a {
+      color: #00ff00;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #888;
+    }
+    .chat-box {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: left;
+    }
+    .chat-messages {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .chat-message {
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 5px;
+    }
+    .chat-message.user {
+      background-color: #00ff00;
+      color: #1a1a1a;
+      align-self: flex-end;
+    }
+    .chat-message.bot {
+      background-color: #444;
+    }
+    .chat-input {
+      display: flex;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px 0 0 5px;
+    }
+    .chat-input button {
+      padding: 10px 20px;
+      background-color: #00ff00;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Dark Data Market</h1>
+      <p>Your Trusted Source for Premium Data</p>
+      <div class="account-topright" id="accountLinks">
+        <!-- Will be filled dynamically -->
+      </div>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#" class="active" onclick="showSection('home'); setActive(this)">Home</a></li>
+        <li><a href="#" onclick="showSection('products'); setActive(this)">Products</a></li>
+        <li><a href="#" onclick="showSection('contact'); setActive(this)">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section id="home" class="section active">
+      <div class="home">
+        <h2>Welcome to Dark Data Market</h2>
+        <p>We provide high-quality, verified data for discerning clients. Browse our exclusive offerings and contact us for secure transactions.</p>
+        <p>All deals are conducted with utmost discretion and encrypted communication. Explore our products to find what you need.</p>
+        <div id="welcome-message" style="color:#00ff00; font-weight:bold;"></div>
+      </div>
+    </section>
+
+    <section id="products" class="section">
+      <div class="product">
+        <h3>US Credit Card Database</h3>
+        <p>Details: 10,000 verified records with CC numbers, names, and expiration dates.</p>
+        <p>Price: 0.5 BTC</p>
+        <p>Availability: In Stock</p>
+      </div>
+      <div class="product">
+        <h3>Email & Password Combos</h3>
+        <p>Details: 1M+ unique email:password pairs from recent breaches.</p>
+        <p>Price: 0.3 BTC</p>
+        <p>Availability: Limited Stock</p>
+      </div>
+      <div class="product">
+        <h3>SSN & DOB Records</h3>
+        <p>Details: 5,000 US-based SSN and DOB records, high quality.</p>
+        <p>Price: 0.7 BTC</p>
+        <p>Availability: In Stock</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="contact">
+        <p>Contact us for inquiries or orders: <a href="mailto:darkdatamarket@proton.me">darkdatamarket@proton.me</a></p>
+        <p>PGP Key available upon request. All transactions via BTC.</p>
+
+        <!-- Chat box -->
+        <div class="chat-box">
+          <h3 style="color:#00ff00;">Live Chat</h3>
+          <div class="chat-messages" id="chatMessages"></div>
+          <form class="chat-input" onsubmit="sendMessage(event)">
+            <input type="text" id="chatInput" placeholder="Type your message..." required />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="account" class="section">
+      <div class="home" id="account-section">
+        <h2 style="color:#00ff00;">My Account</h2>
+        <div id="login-message" style="text-align:center; color:#ff3333; margin-bottom:10px;"></div>
+        <div id="login-form-container" class="login-form">
+          <form onsubmit="return handleLogin(event)">
+            <input type="text" id="email" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+          </form>
+        </div>
+        <div id="account-greeting" style="display:none; font-size:1.3em; color:#00ff00; margin-top:20px;"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Dark Data Market. All transactions are final. Use at your own risk.</p>
+    </footer>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+      if (sectionId === "account") {
+        updateAccountSection();
+      }
+    }
+
+    function setActive(link) {
+      document.querySelectorAll('nav a, .account-topright a').forEach(a => {
+        a.classList.remove('active');
+      });
+      link.classList.add('active');
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const messageBox = document.getElementById("login-message");
+
+      if (username === "Yami" && password === "darkness") {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("username", username);
+        messageBox.style.color = "#00ff00";
+        messageBox.textContent = "Login successful. Welcome, " + username + "!";
+        document.getElementById("welcome-message").textContent = "Welcome, " + username + "!";
+        updateHeaderLinks();
+        showSection('home');
+      } else {
+        messageBox.style.color = "#ff3333";
+        messageBox.textContent = "Invalid username or password.";
+      }
+      return false;
+    }
+
+    function updateAccountSection() {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      const username = localStorage.getItem("username");
+      const loginForm = document.getElementById("login-form-container");
+      const greeting = document.getElementById("account-greeting");
+
+      if (isLoggedIn && username) {
+        loginForm.style.display = "none";
+        greeting.style.display = "block";
+        greeting.textContent = "Hello, " + username + "!";
+      } else {
+        loginForm.style.display = "block";
+        greeting.style.display = "none";
+        greeting.textContent = "";
+      }
+    }
+
+    function updateHeaderLinks() {
+      const accountLinks = document.getElementById("accountLinks");
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      if (isLoggedIn) {
+        accountLinks.innerHTML = `
+          <a href="#" onclick="showSection('account'); setActive(this)">My Account</a>
+          <a href="#" onclick="logout()">Logout</a>
+        `;
+      } else {
+        accountLinks.innerHTML = `
+          <a href="#" onclick="showSection('account'); setActive(this)">My Account</a>
+        `;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("username");
+      document.getElementById("welcome-message").textContent = "";
+      updateHeaderLinks();
+      updateAccountSection();
+      showSection("home");
+    }
+
+    let messageCount = 0;
+
+    function sendMessage(event) {
+      event.preventDefault();
+      const input = document.getElementById("chatInput");
+      const message = input.value.trim();
+      if (!message) return;
+
+      appendMessage("user", message);
+      input.value = "";
+
+      let botReply = "";
+
+      if (messageCount === 0) {
+        botReply = "We are always happy to help lesser.";
+      } else if (messageCount === 1) {
+        botReply = "Let me ask the Shadowlord.";
+      } else {
+        botReply = "Your message has been received.";
+      }
+
+      messageCount++;
+
+      setTimeout(() => {
+        appendMessage("bot", botReply);
+      }, 800);
+    }
+
+    function appendMessage(sender, text) {
+      const chat = document.getElementById("chatMessages");
+      const msg = document.createElement("div");
+      msg.className = `chat-message ${sender}`;
+      msg.textContent = text;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    window.onload = () => {
+      updateAccountSection();
+      updateHeaderLinks();
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      const username = localStorage.getItem("username");
+      if (isLoggedIn && username) {
+        document.getElementById("welcome-message").textContent = "Welcome, " + username + "!";
+      }
+    };
+  </script>
+</body>
+</html>
